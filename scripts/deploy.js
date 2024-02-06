@@ -35,3 +35,8 @@ main().catch((error) => {
   console.error(error);
   process.exitCode = 1;
 });
+
+async function main() {
+  const EventTest = await hre.ethers.getContractFactory("FreeToken");
+  const eventTest = await EventTest.deploy();
+}
