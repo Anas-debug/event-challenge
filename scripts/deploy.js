@@ -7,7 +7,7 @@
 const hre = require("hardhat");
 
 async function main() { 
-  const EventTest = await hre.ethers.getContractFactory("Payement");
+  const EventTest = await hre.ethers.getContractFactory("PayementSolution");
   const eventTest = await EventTest.deploy();
 
   const FreeToken = await hre.ethers.getContractFactory("FreeToken");

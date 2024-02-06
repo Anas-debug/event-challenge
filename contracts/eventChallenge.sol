@@ -2,7 +2,7 @@
 
 pragma solidity ^0.8.13;
 
-contract Bank {
+contract PayementSolution {
 
     mapping(address => uint) private balances;
 
