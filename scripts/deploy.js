@@ -7,11 +7,23 @@
 const hre = require("hardhat");
 
 async function main() { 
-  const EventTest = await hre.ethers.getContractFactory("Bank");
+  const EventTest = await hre.ethers.getContractFactory("Payement");
   const eventTest = await EventTest.deploy();
 
+  const FreeToken = await hre.ethers.getContractFactory("FreeToken");
+  const freeToken = await FreeToken.deploy();
+  await freeToken.deployed()
   await eventTest.deployed();
 
+  freeToken.on("Mint", (to, amount) => {
+    console.log(`Minting: ${to} ${amount}FT`);
+  })
+  freeToken.on("Burn", (to, amount) => {
+    console.log(`Burning: ${to} ${amount}FT`);
+  })
+  freeToken.on("Sending", (from, to, amount) => {
+    console.log(`Sending from Provider: ${from} Recipient ${to} ${amount}FT`);
+  })
   eventTest.on("Deposit", (owner, amount) => {
     console.log(`New deposit: ${owner} ${amount} WEI`);
   })
@@ -36,7 +48,3 @@ main().catch((error) => {
   process.exitCode = 1;
 });
 
-async function main() {
-  const EventTest = await hre.ethers.getContractFactory("FreeToken");
-  const eventTest = await EventTest.deploy();
-}
