@@ -21,9 +21,9 @@ async function main() {
   freeToken.on("Burn", (to, amount) => {
     console.log(`Burning: ${to} ${amount}FT`);
   })
-  freeToken.on("Sending", (from, to, amount) => {
-    console.log(`Sending from Provider: ${from} Recipient ${to} ${amount}FT`);
-  })
+  freeToken.on("Send", (fromAddress, to, amount) => {
+    console.log(`Sending from Provider: ${fromAddress} Recipient ${to} ${amount}FT`);
+  });
   eventTest.on("Deposit", (owner, amount) => {
     console.log(`New deposit: ${owner} ${amount} WEI`);
   })
